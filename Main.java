@@ -1,3 +1,21 @@
+/**
+ * Automated Payroll System
+ * Written by: Sly Kint A. Bacalso
+ * CS-228 
+ * 
+ * This program is a payroll system applied with Data Structures
+ * and Algorithm that will automate the process of model.
+ * 
+ * openjdk version "11.0.14" 2022-01-18
+ * OpenJDK Runtime Environment (build 11.0.14+9-post-Debian-1)
+ * penJDK 64-Bit Server VM (build 11.0.14+9-post-Debian-1, mixed mode, sharing)
+ * 
+ * Usage: 
+ *  $ javac Main.java && java Main
+ * 
+ * Machine OS used: Linux 
+ */
+
 import Payroll.*;
 import Payroll.EmployeeGenerator.DataFaker;
 
@@ -6,12 +24,14 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        // init objects
         LastnameEmployeeRoster roster = new LastnameEmployeeRoster();
         DataFaker faker = new DataFaker();
         Timer timer = new Timer();
         Scanner sc = new Scanner(System.in);
         SecureRandom random = new SecureRandom();
 
+        // configuration of data
         String companyName;
         double wagePerItem, commissionPerItem, dailyRate, regularSalary;
         System.out.println("To start the system");
@@ -45,7 +65,7 @@ public class Main {
 
         // All test cases are passed removing assert after testing
         long time = 5000L;
-        for(int i = 1; i <= 20; i++){
+        for(int i = 1; i <= 8; i++){
             switch(i){
                 case 1: {
                     timer.schedule(new TimerTask(){
@@ -70,7 +90,6 @@ public class Main {
                                 else { 
                                     roster.add(new LastnamePieceWorker(faker.lastname(), faker.age(), companyName, faker.gender(), faker.address()));
                                 }
-
                                 roster.setCommissionPerItemForAllCE(commissionPerItem);
                                 roster.setWageForAllPE(wagePerItem);
                                 roster.setDailyRateForAllHE(dailyRate);
@@ -78,8 +97,6 @@ public class Main {
                             }
                         }, time += 50L);
                     }
-
-                    
                 }
                 break;
                 case 2: {
@@ -166,9 +183,86 @@ public class Main {
                     }, time += 100L);
                 }
                 break;
+                case 7: {
+                    timer.schedule(new TimerTask(){
+                        @Override
+                        public void run(){
+                            System.out.println("=========================================");
+                            System.out.println("\nEmployee starting to work...\n");
+                            System.out.println("=========================================");
+                        }
+                    }, time += 2000L);
+                    timer.schedule(new TimerTask(){
+                        @Override
+                        public void run(){
+                            System.out.println("Week 1...\n");
+                            roster.work();
+
+                            //chance to fire or leave and remove employee
+                            if(random.nextInt(3 - 1) + 1 == 1){
+                                System.out.println("Some employee is getting fired...");
+                                roster.remove(random.nextInt(roster.count()+1 - 1) + 1);
+                            }
+
+                            if(random.nextInt(3 - 1) + 1 == 1){
+                                System.out.println("Some employee is leaving without prior notice...");
+                                roster.remove(random.nextInt(roster.count()+1 - 1) + 1);
+                            }
+                        }
+                    }, time += 2000L);
+                    timer.schedule(new TimerTask(){
+                        @Override
+                        public void run(){
+                            System.out.println("Week 2...\n");
+                            roster.work();
+                        }
+                    }, time += 2000L);
+                    timer.schedule(new TimerTask(){
+                        @Override
+                        public void run(){
+                            System.out.println("Week 3...\n");
+                            roster.work();
+                        }
+                    }, time += 2000L);
+
+                    timer.schedule(new TimerTask(){
+                        @Override
+                        public void run(){
+                            System.out.println("Week 4...\n");
+                            roster.work();
+                        }
+                    }, time += 2000L);
+                }
+                break;
+                case 8: {
+                    timer.schedule(new TimerTask(){
+                        @Override
+                        public void run(){
+                            System.out.println("End of the month...");
+                        }
+                    }, time += 2000L);
+
+                    timer.schedule(new TimerTask(){
+                        @Override
+                        public void run(){
+                            System.out.println("=========================================");
+                            System.out.println("\nCalculating payroll please wait...\n");
+                            System.out.println("=========================================");
+                        }
+                    }, time += 2000L);
+                    timer.schedule(new TimerTask(){
+                        @Override
+                        public void run(){
+                            roster.payroll();
+
+                            // end the timer task
+                            timer.cancel();
+                        }
+                    }, time += 4000L);
+                    
+                }
             }
         }
-
         sc.close();
     }      
 }

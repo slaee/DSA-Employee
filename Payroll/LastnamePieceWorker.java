@@ -14,7 +14,7 @@ public class LastnamePieceWorker extends LastnameEmployee{
     public LastnamePieceWorker(String name, int age, String company,
     Gender gender, String address){
         super(name, age, company, gender, address);
-        this.wagePerItem = 0;
+        wagePerItem = 0;
     }
 
     public LastnamePieceWorker(String name, int age, String company, Gender gender, String address, double wagePerItem, int numberOfItemCompleted){
@@ -27,6 +27,14 @@ public class LastnamePieceWorker extends LastnameEmployee{
         this.salary = this.getWagePerItem() * this.getNumberOfItemCompleted();
     }
 
+    public String payrollToString(){
+        return super.toString()
+            +"\nWage per item: PHP " + String.format("%.2f", this.getWagePerItem())
+            +"\nNumber of items completed: " + this.getNumberOfItemCompleted()
+            +"\nSalary: PHP " + String.format("%.2f", this.getSalary())
+            +"\n";
+    }
+
     /**
      * Override setters and getters
      */
@@ -37,7 +45,7 @@ public class LastnamePieceWorker extends LastnameEmployee{
 
     public String toString(){
         return super.toString()
-            +"\nWage per item: " + getWagePerItem()
+            +"\nWage per item: PHP " + String.format("%.2f", this.getWagePerItem())
             +"\nItem completed: " + getNumberOfItemCompleted()
             +"\n";
     }
@@ -63,7 +71,7 @@ public class LastnamePieceWorker extends LastnameEmployee{
     }
 
     public void setNumberOfItemCompleted(int numberOfItemCompleted){
-        this.numberOfItemCompleted = numberOfItemCompleted;
+        this.numberOfItemCompleted += numberOfItemCompleted;
     }
 
     public void setWagePerItem(double wagePerItem){

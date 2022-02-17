@@ -15,8 +15,8 @@ public class LastnameCommissionEmployee extends LastnameEmployee{
 
     public LastnameCommissionEmployee(String name, int age, String company, Gender gender, String address){
         super(name, age, company, gender, address);
-        this.commissionPerItem = 0;
-        this.regularSalary = 0;
+        commissionPerItem = 0;
+        regularSalary = 0;
     }
 
     public LastnameCommissionEmployee(String name, int age, String company, Gender gender, String address, double commissionPerItem, int numberOfItemsSold, double regularSalary){
@@ -32,9 +32,18 @@ public class LastnameCommissionEmployee extends LastnameEmployee{
 
     public String toString(){
         return super.toString()
-            +"\nCommission per item: " + this.getCommissionPerItem()
+            +"\nCommission per item: PHP " + String.format("%.2f", this.getCommissionPerItem())
             +"\nNumber of items sold: " + this.getNumberOfItemSold()
-            +"\nRegular salary: " + this.getRegularySalary()
+            +"\nRegular salary: PHP " + String.format("%.2f", this.getRegularySalary())
+            +"\n";
+    }
+
+    public String payrollToString(){
+        return super.toString()
+            +"\nCommission per item: PHP " + String.format("%.2f", this.getCommissionPerItem())
+            +"\nNumber of items sold: " + this.getNumberOfItemSold()
+            +"\nRegular salary: PHP " + String.format("%.2f", this.getRegularySalary())
+            +"\nSalary: PHP " + String.format("%.2f", this.getSalary())
             +"\n";
     }
 
@@ -96,6 +105,10 @@ public class LastnameCommissionEmployee extends LastnameEmployee{
 
     public String getAddress(){
         return super.getAddress();
+    }
+
+    public void setNumberOfItemSold(int numberOfItemsSold){
+        this.numberOfItemsSold += numberOfItemsSold;
     }
 
     public int getNumberOfItemSold(){

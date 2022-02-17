@@ -104,4 +104,5 @@ public abstract class LastnameEmployee implements LastNameInterface {
 
     public abstract String basicToString();
     public abstract void computeSalary();
+    public abstract String payrollToString();
 }

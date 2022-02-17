@@ -1,10 +1,12 @@
 package Payroll;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 public class LastnameEmployeeRoster {
     private int size;
     private int index;
+    SecureRandom random;
     LastnameEmployee[] EmployeeList;
 
     /**
@@ -51,6 +53,7 @@ public class LastnameEmployeeRoster {
         size = 5; // default size of EmployeeList
         index = 0;
         EmployeeList = new LastnameEmployee[size];
+        random = new SecureRandom();
     }
 
     public void add(LastnameEmployee employee) {
@@ -83,8 +86,55 @@ public class LastnameEmployeeRoster {
                 }
                 System.out.println("Employee " + EmployeeList[i].getName() 
                     +" ID: "+ idNumber 
-                    +" has been removed."); 
+                    +" has been removed.\n"); 
                 break;
+            }
+        }
+    }
+
+    public void work(){
+        for (int i = 0; i < index; i++) {
+            if(isCE(EmployeeList[i])){
+                int itemsSoldThisWeek = random.nextInt(20 - 10) + 10;
+                ((LastnameCommissionEmployee) EmployeeList[i]).setNumberOfItemSold(itemsSoldThisWeek);
+            }
+
+            if(isHE(EmployeeList[i])){
+                int hoursWorkedThisWeek = random.nextInt(50 - 30) + 30;
+                ((LastnameHourlyEmployee) EmployeeList[i]).setNumberOfHoursWorked(hoursWorkedThisWeek);
+            }
+
+            if(isPE(EmployeeList[i])){
+                int itemsCompletedThisWeek = random.nextInt(10 - 5) + 5;
+                ((LastnamePieceWorker) EmployeeList[i]).setNumberOfItemCompleted(itemsCompletedThisWeek);
+            }
+        }
+    }
+
+    public void payroll() {
+        System.out.println(">>> Payroll Result <<<\n");
+        System.out.println("========[ Commision Employees Payroll ]========\n");
+        for (int i = 0; i < index; i++) {
+            if(isCE(EmployeeList[i])){
+                ((LastnameCommissionEmployee) EmployeeList[i]).computeCommission();
+                EmployeeList[i].computeSalary();
+                System.out.println(EmployeeList[i].payrollToString());
+            }
+        }
+
+        System.out.println("\n========[ Hourly Employees Payroll ]========\n");
+        for (int i = 0; i < index; i++) {
+            if(isHE(EmployeeList[i])){
+                EmployeeList[i].computeSalary();
+                System.out.println(EmployeeList[i].payrollToString());
+            }
+        }
+
+        System.out.println("\n========[ Piece Wokers Payroll ]========\n");
+        for (int i = 0; i < index; i++) {
+            if(isPE(EmployeeList[i])){
+                EmployeeList[i].computeSalary();
+                System.out.println(EmployeeList[i].payrollToString());
             }
         }
     }
@@ -147,7 +197,7 @@ public class LastnameEmployeeRoster {
     public void setWageForAllPE(double wage){
         for (int i = 0; i < index; i++) {
             if (isPE(EmployeeList[i])) {
-                // cast the super object to the subclass object to access the subclass
+                // cast the super object with subclass object to access the subclass
                 ((LastnamePieceWorker) EmployeeList[i]).setWagePerItem(wage);
             }
         }
@@ -156,7 +206,7 @@ public class LastnameEmployeeRoster {
     public void setDailyRateForAllHE(double dailyRate){
         for (int i = 0; i < index; i++) {
             if (isHE(EmployeeList[i])) {
-                // cast the super object to the subclass object to access the subclass method
+                // cast the super object with subclass object to access the subclass method
                 ((LastnameHourlyEmployee) EmployeeList[i]).setDailyRate(dailyRate);
             }
         }
@@ -165,7 +215,7 @@ public class LastnameEmployeeRoster {
     public void setCommissionPerItemForAllCE(double commissionPerItem){
         for (int i = 0; i < index; i++) {
             if (isCE(EmployeeList[i])) {
-                // cast the super object to the subclass object to access the subclass method
+                // cast the super object with subclass object to access the subclass method
                 ((LastnameCommissionEmployee) EmployeeList[i]).setCommissionPerItem(commissionPerItem);
             }
         }
@@ -174,7 +224,7 @@ public class LastnameEmployeeRoster {
     public void setRegularSalaryForAllCE(double regularSalary){
         for (int i = 0; i < index; i++) {
             if (isCE(EmployeeList[i])) {
-                // cast the super object to the subclass object to access the subclass method
+                // cast the super object with subclass object to access the subclass method
                 ((LastnameCommissionEmployee) EmployeeList[i]).setRegularSalary(regularSalary);
             }
         }
@@ -207,13 +257,6 @@ public class LastnameEmployeeRoster {
             if (isPE(EmployeeList[i])) {
                 System.out.println(EmployeeList[i].toString());
             }
-        }
-    }
-
-    public void payroll() {
-        for (int i = 0; i < index; i++) {
-            EmployeeList[i].computeSalary();
-            System.out.println(EmployeeList[i].toString());
         }
     }
 }

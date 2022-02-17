@@ -16,9 +16,9 @@ public class LastnameHourlyEmployee extends LastnameEmployee{
 
     public LastnameHourlyEmployee(String name, int age, String company, Gender gender, String address){
         super(name, age, company, gender, address);
-        this.dailyRate = 0;
-        this.workedHours = 0;
-        this.salary = 0;
+        dailyRate = 0;
+        workedHours = 0;
+        salary = 0;
     }
 
     public LastnameHourlyEmployee(String name, int age, String company, Gender gender, String address, int workedHours, double dailyRate){
@@ -28,13 +28,19 @@ public class LastnameHourlyEmployee extends LastnameEmployee{
     }
 
     public void computeSalary(){
-        float hourlyRate = (float) (this.getDailyRate() / REGULAR_WORKING_HOURS);
-        if(workedHours > 40){
-            int OTHours = this.getWorkedHours() - REGULAR_WORKING_HOURS;
-            float OTPay = OTHours * (hourlyRate * OT_PAY_RATE);
-            this.salary = (REGULAR_WORKING_HOURS * hourlyRate) + OTPay;
+        //assume 5 days for 40 hours in a week will be 8 hours every day
+        double hourlyRate = (this.getDailyRate() / (REGULAR_WORKING_HOURS/5));
+        // total regulary working in a month is 40*4weeks = 160hours
+        if(workedHours > 160){
+            int OTHours = this.getHoursWorked() % REGULAR_WORKING_HOURS;
+            int regularHoursWorked = 160;
+
+            double OTPay = OTHours * (hourlyRate * OT_PAY_RATE);
+            System.out.println("OTPay: " + OTPay);
+            this.salary = (regularHoursWorked * hourlyRate) + OTPay;
+
         }else{
-            this.salary = workedHours * hourlyRate;
+            this.salary = this.getHoursWorked() * hourlyRate;
         }
     }
 
@@ -42,10 +48,31 @@ public class LastnameHourlyEmployee extends LastnameEmployee{
         return "Type: HE " + super.toString();
     }
 
+    public String payrollToString(){
+        int OTHours;
+        int regularHoursWorked;
+
+        if (this.getHoursWorked() > 160){
+            OTHours = this.getHoursWorked() % REGULAR_WORKING_HOURS;
+            regularHoursWorked = 160;
+        } else {
+            OTHours = 0;
+            regularHoursWorked = this.getHoursWorked();
+        }
+        return super.toString()
+            +"\nDaily rate: PHP " + String.format("%.2f",this.getDailyRate())
+            +"\nOver time Pay Rate: " + (OT_PAY_RATE * 100) + "%"
+            +"\nRegular Hours worked: " + regularHoursWorked 
+            +"\nOvertime Hours worked: " + OTHours
+            +"\nTotal Hours worked: " + this.getHoursWorked()
+            +"\nSalary: PHP" + String.format("%.2f", this.getSalary())
+            +"\n";
+    }
+
     public String toString(){
         return super.toString()
-            +"\nDaily rate: " + this.getDailyRate()
-            +"\nWorked hours: " + this.getWorkedHours()
+            +"\nDaily rate: PHP " + String.format("%.2f",this.getDailyRate())
+            +"\nWorked hours: " + this.getHoursWorked()
             +"\n";
     }
     
@@ -101,7 +128,11 @@ public class LastnameHourlyEmployee extends LastnameEmployee{
         return REGULAR_WORKING_HOURS;
     }
 
-    public int getWorkedHours(){
+    public void setNumberOfHoursWorked(int workedHours){
+        this.workedHours += workedHours;
+    }
+
+    public int getHoursWorked(){
         return workedHours;
     }
 
