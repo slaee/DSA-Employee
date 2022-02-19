@@ -2,7 +2,7 @@ package Payroll;
 
 import Payroll.Enums.Gender;
 
-public class LastnameHourlyEmployee extends LastnameEmployee{
+public class BacalsoHourlyEmployee extends BacalsoEmployee{
     private double salary;
     private int workedHours;
     private double dailyRate;
@@ -10,18 +10,18 @@ public class LastnameHourlyEmployee extends LastnameEmployee{
     private final int REGULAR_WORKING_HOURS = 40;
     private final float OT_PAY_RATE = 1.25f;
 
-    public LastnameHourlyEmployee(){
+    public BacalsoHourlyEmployee(){
         super();
     }
 
-    public LastnameHourlyEmployee(String name, int age, String company, Gender gender, String address){
+    public BacalsoHourlyEmployee(String name, int age, String company, Gender gender, String address){
         super(name, age, company, gender, address);
         dailyRate = 0;
         workedHours = 0;
         salary = 0;
     }
 
-    public LastnameHourlyEmployee(String name, int age, String company, Gender gender, String address, int workedHours, double dailyRate){
+    public BacalsoHourlyEmployee(String name, int age, String company, Gender gender, String address, int workedHours, double dailyRate){
         super(name, age, company, gender, address);
         this.workedHours = workedHours;
         this.dailyRate = dailyRate;

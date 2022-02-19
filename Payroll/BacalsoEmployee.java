@@ -18,7 +18,7 @@ interface LastNameInterface {
     public String getAddress();
 }
 
-public abstract class LastnameEmployee implements LastNameInterface {
+public abstract class BacalsoEmployee implements LastNameInterface {
     private int idNumber;
     private String name;
     private int age;
@@ -26,9 +26,9 @@ public abstract class LastnameEmployee implements LastNameInterface {
     private Gender gender;
     private String address;
 
-    public LastnameEmployee() {}
+    public BacalsoEmployee() {}
     
-    public LastnameEmployee(String name, int age, String company, Gender gender, String address){
+    public BacalsoEmployee(String name, int age, String company, Gender gender, String address){
         this.name = name;
         this.age = age;
         this.company = company;

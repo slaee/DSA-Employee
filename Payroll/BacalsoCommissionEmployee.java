@@ -2,24 +2,24 @@ package Payroll;
 
 import Payroll.Enums.Gender;
 
-public class LastnameCommissionEmployee extends LastnameEmployee{
+public class BacalsoCommissionEmployee extends BacalsoEmployee{
     private double commission;
     private double commissionPerItem;
     private int numberOfItemsSold;
     private double regularSalary;
     private double salary;
 
-    public LastnameCommissionEmployee() {
+    public BacalsoCommissionEmployee() {
         super();
     }
 
-    public LastnameCommissionEmployee(String name, int age, String company, Gender gender, String address){
+    public BacalsoCommissionEmployee(String name, int age, String company, Gender gender, String address){
         super(name, age, company, gender, address);
         commissionPerItem = 0;
         regularSalary = 0;
     }
 
-    public LastnameCommissionEmployee(String name, int age, String company, Gender gender, String address, double commissionPerItem, int numberOfItemsSold, double regularSalary){
+    public BacalsoCommissionEmployee(String name, int age, String company, Gender gender, String address, double commissionPerItem, int numberOfItemsSold, double regularSalary){
         super(name, age, company, gender, address);
         this.commissionPerItem = commissionPerItem;
         this.numberOfItemsSold = numberOfItemsSold;

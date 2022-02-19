@@ -2,22 +2,22 @@ package Payroll;
 
 import Payroll.Enums.Gender;
 
-public class LastnamePieceWorker extends LastnameEmployee{
+public class BacalsoPieceWorker extends BacalsoEmployee{
     private double salary;
     private double wagePerItem;
     private int numberOfItemCompleted;
 
-    public LastnamePieceWorker() {
+    public BacalsoPieceWorker() {
         super();
     }
 
-    public LastnamePieceWorker(String name, int age, String company,
+    public BacalsoPieceWorker(String name, int age, String company,
     Gender gender, String address){
         super(name, age, company, gender, address);
         wagePerItem = 0;
     }
 
-    public LastnamePieceWorker(String name, int age, String company, Gender gender, String address, double wagePerItem, int numberOfItemCompleted){
+    public BacalsoPieceWorker(String name, int age, String company, Gender gender, String address, double wagePerItem, int numberOfItemCompleted){
         super(name, age, company, gender, address);
         this.wagePerItem = wagePerItem;
         this.numberOfItemCompleted = numberOfItemCompleted;

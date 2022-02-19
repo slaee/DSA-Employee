@@ -3,11 +3,11 @@ package Payroll;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-public class LastnameEmployeeRoster {
+public class BacalsoEmployeeRoster {
     private int size;
     private int index;
     SecureRandom random;
-    LastnameEmployee[] EmployeeList;
+    BacalsoEmployee[] EmployeeList;
 
     /**
      * Java Dynamic Array Data Structure
@@ -24,7 +24,7 @@ public class LastnameEmployeeRoster {
      */
     void dynamic_add(){
         int newSize = size * 2;
-        LastnameEmployee[] newEmployee = Arrays.copyOf(EmployeeList, newSize);
+        BacalsoEmployee[] newEmployee = Arrays.copyOf(EmployeeList, newSize);
         EmployeeList = newEmployee;
         size = newSize;
     }
@@ -44,19 +44,19 @@ public class LastnameEmployeeRoster {
      */
     void dynamic_reduce(){
         int newSize = size / 2;
-        LastnameEmployee[] newEmployee = Arrays.copyOf(EmployeeList, newSize);
+        BacalsoEmployee[] newEmployee = Arrays.copyOf(EmployeeList, newSize);
         EmployeeList = newEmployee;
         size = newSize;
     }
 
-    public LastnameEmployeeRoster() {
+    public BacalsoEmployeeRoster() {
         size = 5; // default size of EmployeeList
         index = 0;
-        EmployeeList = new LastnameEmployee[size];
+        EmployeeList = new BacalsoEmployee[size];
         random = new SecureRandom();
     }
 
-    public void add(LastnameEmployee employee) {
+    public void add(BacalsoEmployee employee) {
         if(index == getSize()) {
             dynamic_add();
         }
@@ -96,17 +96,17 @@ public class LastnameEmployeeRoster {
         for (int i = 0; i < index; i++) {
             if(isCE(EmployeeList[i])){
                 int itemsSoldThisWeek = random.nextInt(20 - 10) + 10;
-                ((LastnameCommissionEmployee) EmployeeList[i]).setNumberOfItemSold(itemsSoldThisWeek);
+                ((BacalsoCommissionEmployee) EmployeeList[i]).setNumberOfItemSold(itemsSoldThisWeek);
             }
 
             if(isHE(EmployeeList[i])){
                 int hoursWorkedThisWeek = random.nextInt(50 - 30) + 30;
-                ((LastnameHourlyEmployee) EmployeeList[i]).setNumberOfHoursWorked(hoursWorkedThisWeek);
+                ((BacalsoHourlyEmployee) EmployeeList[i]).setNumberOfHoursWorked(hoursWorkedThisWeek);
             }
 
             if(isPE(EmployeeList[i])){
                 int itemsCompletedThisWeek = random.nextInt(10 - 5) + 5;
-                ((LastnamePieceWorker) EmployeeList[i]).setNumberOfItemCompleted(itemsCompletedThisWeek);
+                ((BacalsoPieceWorker) EmployeeList[i]).setNumberOfItemCompleted(itemsCompletedThisWeek);
             }
         }
     }
@@ -116,7 +116,7 @@ public class LastnameEmployeeRoster {
         System.out.println("========[ Commision Employees Payroll ]========\n");
         for (int i = 0; i < index; i++) {
             if(isCE(EmployeeList[i])){
-                ((LastnameCommissionEmployee) EmployeeList[i]).computeCommission();
+                ((BacalsoCommissionEmployee) EmployeeList[i]).computeCommission();
                 EmployeeList[i].computeSalary();
                 System.out.println(EmployeeList[i].payrollToString());
             }
@@ -152,16 +152,16 @@ public class LastnameEmployeeRoster {
     }
 
     private boolean isCE(Object o){
-        return o instanceof LastnameCommissionEmployee;
+        return o instanceof BacalsoCommissionEmployee;
     }
 
     private boolean isHE(Object o){
-        return o instanceof LastnameHourlyEmployee;
+        return o instanceof BacalsoHourlyEmployee;
     }
 
 
     private boolean isPE(Object o){
-        return o instanceof LastnamePieceWorker;
+        return o instanceof BacalsoPieceWorker;
     }
 
     public int countCE() {
@@ -198,7 +198,7 @@ public class LastnameEmployeeRoster {
         for (int i = 0; i < index; i++) {
             if (isPE(EmployeeList[i])) {
                 // cast the super object with subclass object to access the subclass
-                ((LastnamePieceWorker) EmployeeList[i]).setWagePerItem(wage);
+                ((BacalsoPieceWorker) EmployeeList[i]).setWagePerItem(wage);
             }
         }
     }
@@ -207,7 +207,7 @@ public class LastnameEmployeeRoster {
         for (int i = 0; i < index; i++) {
             if (isHE(EmployeeList[i])) {
                 // cast the super object with subclass object to access the subclass method
-                ((LastnameHourlyEmployee) EmployeeList[i]).setDailyRate(dailyRate);
+                ((BacalsoHourlyEmployee) EmployeeList[i]).setDailyRate(dailyRate);
             }
         }
     }
@@ -216,7 +216,7 @@ public class LastnameEmployeeRoster {
         for (int i = 0; i < index; i++) {
             if (isCE(EmployeeList[i])) {
                 // cast the super object with subclass object to access the subclass method
-                ((LastnameCommissionEmployee) EmployeeList[i]).setCommissionPerItem(commissionPerItem);
+                ((BacalsoCommissionEmployee) EmployeeList[i]).setCommissionPerItem(commissionPerItem);
             }
         }
     }
@@ -225,7 +225,7 @@ public class LastnameEmployeeRoster {
         for (int i = 0; i < index; i++) {
             if (isCE(EmployeeList[i])) {
                 // cast the super object with subclass object to access the subclass method
-                ((LastnameCommissionEmployee) EmployeeList[i]).setRegularSalary(regularSalary);
+                ((BacalsoCommissionEmployee) EmployeeList[i]).setRegularSalary(regularSalary);
             }
         }
     }

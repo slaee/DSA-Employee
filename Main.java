@@ -25,7 +25,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         // init objects
-        LastnameEmployeeRoster roster = new LastnameEmployeeRoster();
+        BacalsoEmployeeRoster roster = new BacalsoEmployeeRoster();
         DataFaker faker = new DataFaker();
         Timer timer = new Timer();
         Scanner sc = new Scanner(System.in);
@@ -82,13 +82,13 @@ public class Main {
                             public void run(){
                                 int randNumber = random.nextInt(4 - 1) + 1;
                                 if(randNumber == 1){
-                                    roster.add(new LastnameCommissionEmployee(faker.lastname(), faker.age(), companyName, faker.gender(), faker.address()));
+                                    roster.add(new BacalsoCommissionEmployee(faker.lastname(), faker.age(), companyName, faker.gender(), faker.address()));
                                 }
                                 else if(randNumber == 2) {
-                                    roster.add(new LastnameHourlyEmployee(faker.lastname(), faker.age(), companyName, faker.gender(), faker.address()));
+                                    roster.add(new BacalsoHourlyEmployee(faker.lastname(), faker.age(), companyName, faker.gender(), faker.address()));
                                 }
                                 else { 
-                                    roster.add(new LastnamePieceWorker(faker.lastname(), faker.age(), companyName, faker.gender(), faker.address()));
+                                    roster.add(new BacalsoPieceWorker(faker.lastname(), faker.age(), companyName, faker.gender(), faker.address()));
                                 }
                                 roster.setCommissionPerItemForAllCE(commissionPerItem);
                                 roster.setWageForAllPE(wagePerItem);
